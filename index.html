@@ -7,6 +7,7 @@
 <meta name="description" content="WHS Motorsport & STEM Club at Winchester High School: engineering, aerodynamics, telemetry and race strategy for students of every experience level.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700;1,800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -77,6 +78,63 @@ p{margin:0}
     repeating-linear-gradient(45deg,rgba(255,255,255,.018) 0 2px,transparent 2px 6px),
     repeating-linear-gradient(-45deg,rgba(0,0,0,.25) 0 2px,transparent 2px 6px),
     var(--carbon)}
+.hero{isolation:isolate;padding-bottom:200px}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
+.hero-bg.ready{opacity:1}
+.hero-shade{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(21,23,26,.94) 0%,rgba(21,23,26,.78) 34%,rgba(21,23,26,.25) 62%,rgba(21,23,26,.1) 100%),
+    linear-gradient(180deg,rgba(21,23,26,.5) 0%,rgba(21,23,26,0) 22%)}
+.hero .wrap{position:relative;z-index:2}
+/* cinematic photo hero: active only when CONFIG.heroPhotos lists images */
+.hero-photos{position:absolute;inset:0;z-index:0;overflow:hidden;background:#0b0c0e;opacity:0;transition:opacity 1.4s ease}
+.hero.has-photos .hero-photos{opacity:1}
+.hero.has-photos .hero-bg{display:none}
+.hero.has-photos{padding-bottom:88px}
+.shot{position:absolute;inset:-2%;background-size:cover;background-position:center;opacity:0;will-change:transform,opacity,clip-path;
+  filter:saturate(.85) contrast(1.08) brightness(.82)}
+.shot.live{opacity:1;animation:kenburns var(--dur,8s) linear forwards}
+.shot.in{opacity:1;animation:wipeIn 1.1s cubic-bezier(.7,0,.2,1) forwards, kenburns var(--dur,8s) linear forwards}
+.shot.out{opacity:1;animation:blurOut 1.1s cubic-bezier(.6,0,.3,1) forwards}
+.shot.drift-l{--kx:-2.5%}.shot.drift-r{--kx:2.5%}
+@keyframes kenburns{from{transform:scale(1.14) translateX(var(--kx,0))}to{transform:scale(1.02) translateX(0)}}
+@keyframes wipeIn{from{clip-path:polygon(0 0,0 0,-12% 100%,-12% 100%)}to{clip-path:polygon(0 0,112% 0,100% 100%,-12% 100%)}}
+@keyframes blurOut{0%{filter:saturate(.85) contrast(1.08) brightness(.82) blur(0);transform:scale(1.02) translateX(0)}
+  100%{filter:saturate(.6) contrast(1.08) brightness(.45) blur(6px);transform:scale(1.06) translateX(6%)}}
+.sweep{position:absolute;top:-10%;bottom:-10%;width:22%;left:-30%;z-index:2;pointer-events:none;opacity:0;transform:skewX(-8deg);
+  background:linear-gradient(90deg,rgba(224,34,58,0) 0%,rgba(224,34,58,.35) 55%,rgba(255,255,255,.55) 78%,rgba(47,214,238,.25) 88%,rgba(47,214,238,0) 100%);mix-blend-mode:screen;filter:blur(6px)}
+.sweep.go{animation:sweep 1.1s cubic-bezier(.7,0,.2,1) forwards}
+@keyframes sweep{0%{left:-30%;opacity:0}12%{opacity:1}85%{opacity:1}100%{left:112%;opacity:0}}
+.grade{position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%),
+    linear-gradient(180deg,rgba(47,214,238,.06),rgba(224,34,58,.08))}
+.grain{position:absolute;inset:-50%;z-index:4;pointer-events:none;opacity:.06;background-size:180px 180px;animation:grain .9s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.letterbox{position:absolute;left:0;right:0;height:0;z-index:5;background:#000;pointer-events:none;transition:height 1.6s cubic-bezier(.6,0,.2,1)}
+.letterbox.top{top:0}.letterbox.bot{bottom:0}
+.hero.has-photos.rolling .letterbox{height:28px}
+.photo-credit{position:absolute;right:16px;bottom:10px;z-index:6;margin:0;font-size:.78rem;color:rgba(245,247,250,.7);text-shadow:0 1px 2px #000;transition:opacity .6s}
+.photo-credit:empty{display:none}
+.photo-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.photo-credit a:hover{color:#fff}
+.hero.has-photos .hero-shade{background:
+    linear-gradient(90deg,rgba(13,14,16,.9) 0%,rgba(13,14,16,.72) 36%,rgba(13,14,16,.2) 66%,rgba(13,14,16,.15) 100%),
+    linear-gradient(180deg,rgba(13,14,16,.5) 0%,rgba(13,14,16,0) 24%,rgba(13,14,16,0) 75%,rgba(13,14,16,.7) 100%)}
+@media (max-width:920px){
+  .hero.has-photos{padding-bottom:64px}
+  .hero.has-photos .hero-shade{background:linear-gradient(180deg,rgba(13,14,16,.86) 0%,rgba(13,14,16,.74) 55%,rgba(13,14,16,.9) 100%)}
+  .hero.has-photos.rolling .letterbox{height:14px}
+}
+@media (prefers-reduced-motion:reduce){.shot.live,.shot.in{animation:none;transform:scale(1.02)}.grain{animation:none}.letterbox{transition:none}}
+/* cinematic section entrances */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.seen{opacity:1;transform:none}
+.section{position:relative}
+.section::before{content:"";position:absolute;top:-1px;left:0;height:2px;width:0;
+  background:linear-gradient(90deg,rgba(224,34,58,0),var(--crimson) 60%,#fff 85%,var(--cyan));transition:width 1.2s cubic-bezier(.7,0,.2,1)}
+.section.seen::before{width:100%}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.section::before{display:none}}
+@media (max-width:920px){.hero{padding-bottom:150px}.hero-shade{background:linear-gradient(180deg,rgba(21,23,26,.85) 0%,rgba(21,23,26,.75) 50%,rgba(21,23,26,.2) 86%,rgba(21,23,26,.3) 100%)}}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:center}
 .hero h1{font-size:clamp(3.2rem,7.4vw,6rem);font-style:italic;font-weight:800;line-height:.92;text-wrap:balance}
 .hero .lede{margin-top:24px}
@@ -222,6 +280,12 @@ input:focus,select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 
 .fine{color:var(--muted);font-size:.9rem;max-width:36ch}
 .form-error{margin:0;padding:12px 14px;border-radius:8px;background:rgba(255,90,110,.1);border:1px solid rgba(255,90,110,.45);color:#ff9aa6;font-size:.98rem}
 .btn[disabled]{opacity:.6;cursor:wait}
+.consent{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;font-weight:500;font-size:.98rem;color:var(--muted);cursor:pointer}
+.consent input{width:22px;height:22px;min-height:0;margin:2px 0 0;padding:0;accent-color:var(--crimson);cursor:pointer}
+.consent a{color:var(--white)}
+.field.invalid .consent{color:#ff9aa6}
+.legal-links{display:flex;flex-wrap:wrap;gap:6px 18px}
+.legal-links a{color:var(--white)}
 .success{display:none;flex-direction:column;gap:12px;padding:8px 0}
 .success.show{display:flex}
 .success h3{font-size:2rem;font-style:italic}
@@ -285,6 +349,15 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="top" aria-labelledby="heroTitle">
+  <div class="hero-photos" id="heroPhotos" aria-hidden="true">
+    <div class="sweep" id="heroSweep"></div>
+    <div class="grade"></div>
+    <div class="grain" id="heroGrain"></div>
+    <div class="letterbox top"></div><div class="letterbox bot"></div>
+  </div>
+  <canvas class="hero-bg" id="heroBg" aria-hidden="true"></canvas>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <p class="photo-credit" id="photoCredit"></p>
   <div class="wrap">
     <div>
       <h1 id="heroTitle">We Build Things That Work <span style="display:block;white-space:nowrap">Come Join Us</span></h1>
@@ -618,10 +691,17 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
           <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="emailErr">
           <span class="err" id="emailErr">Enter a valid email, like name@school.org.</span>
         </div>
+        <div class="field">
+          <label class="consent" for="consent">
+            <input id="consent" name="consent" type="checkbox" required aria-describedby="consentErr">
+            <span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>. The club uses my name, grade, interest and email only to send club updates.</span>
+          </label>
+          <span class="err" id="consentErr">Please check this box to sign up.</span>
+        </div>
         <input type="text" name="_honey" id="honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <p class="form-error" id="formError" role="alert" hidden></p>
         <div class="form-foot">
-          <p class="fine">We only use this to send club updates.</p>
+          <p class="fine">Under 13? Please ask a parent or guardian before signing up.</p>
           <button class="btn btn-primary" type="submit" id="signupBtn">Sign me up</button>
         </div>
       </div>
@@ -683,8 +763,13 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
       </div>
     </div>
     <div class="legal">
+      <nav class="legal-links" aria-label="Legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="privacy.html#cookies">Cookies</a>
+        <a href="terms.html">Terms of Use</a>
+      </nav>
       <p>&copy; <span id="year">2026</span> WHS Motorsport &amp; STEM Club. All rights reserved.</p>
-      <p>WHS Motorsport &amp; STEM Club is a student organization at Winchester High School. This website is maintained by club members and is not an official website of Winchester High School or Winchester Public Schools. Team, series and brand names mentioned belong to their respective owners.</p>
+      <p>WHS Motorsport &amp; STEM Club is a student organization at Winchester High School. This website is maintained by club members and is not an official website of Winchester High School or Winchester Public Schools. Team, series and brand names mentioned belong to their respective owners; the club is not affiliated with Formula 1, the FIA or any racing team.</p>
     </div>
   </div>
 </footer>
@@ -694,13 +779,27 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 <script>
 /* ============ CONFIG: edit these ============ */
 const CONFIG = {
-  // Club email for sign-ups and sponsor inquiries. Leave "" until you have one.
-  clubEmail: "",
-  // Sign-ups are emailed through FormSubmit (formsubmit.co) to this address.
-  // Optional: add a second address in signupCc to get a copy. After activating, you can
-  // swap signupTo for the random alias FormSubmit sends you, so it isn't visible in the page.
-  signupTo: "whsmotorsportandstemclub@gmail.com",
-  signupCc: ""
+  // Club email shown in the footer and used by the sponsor buttons.
+  clubEmail: "whsmotorsportandstemclub@gmail.com",
+  // Cinematic hero photos, loaded from Unsplash's image service (resized per screen).
+  // To use your own photo instead, set src to e.g. 'images/hero-1.jpg' and leave user empty.
+  // Leave the list empty to go back to the animated drawn-car background.
+  heroPhotos: [
+    { src: 'https://images.unsplash.com/photo-1790531524573-247954d2fb1a', name: 'Raphael Rousseau', user: 'raphaelrousseauphotography' },
+    { src: 'https://images.unsplash.com/photo-1758739956912-a6ea71cdad84', name: 'Thomas De Giorgio', user: 'ilnevischio' },
+    { src: 'https://images.unsplash.com/photo-1778186645041-abaaf492d278', name: 'Reiss Kelly-Alder', user: 'wyntrwxlf' },
+    { src: 'https://images.unsplash.com/photo-1699138346491-d6f4c7e04b85', name: 'Isaac Maffeis', user: 'isaacmaffeis' },
+    { src: 'https://images.unsplash.com/photo-1771979407741-d2534777517b', name: 'Casey Calhoun', user: 'caseycalhoun' },
+    { src: 'https://images.unsplash.com/photo-1614949194403-9602bdc14a3a', name: 'Clément Delacre', user: 'clementdelacre' },
+    { src: 'https://images.unsplash.com/photo-1632214790681-7087f4c8d139', name: 'Eugene Tkachenko', user: 'eugene_tkachenko' },
+    { src: 'https://images.unsplash.com/photo-1610905376670-5e7e0e8a3cfb', name: 'Kenny Leys', user: 'kennyleys' },
+  ],
+  // Sign-ups go to the club's Google Form once you paste its PRE-FILLED LINK below.
+  // When making that link, type exactly NAME, GRADE, INTEREST and EMAIL into the four
+  // questions, so the site can tell which question is which.
+  googleFormPrefill: "",
+  // Until a Google Form link is set, sign-ups are emailed here through FormSubmit (formsubmit.co).
+  signupTo: "whsmotorsportandstemclub@gmail.com"
 };
 
 (function () {
@@ -826,23 +925,40 @@ const CONFIG = {
     catch { toast('Code: ' + code); }
   });
 
+  /* ---------- Google Form connection ---------- */
+  // Turns a pre-filled link (with NAME, GRADE, INTEREST, EMAIL typed in) into the form's
+  // submit address and the ID of each question.
+  function parseGoogleForm(link) {
+    try {
+      if (!link) return null;
+      const u = new URL(link.trim());
+      if (!/docs\.google\.com$/.test(u.hostname) || !/\/forms\/.+\/viewform/.test(u.pathname)) return null;
+      const ids = {};
+      u.searchParams.forEach((v, k) => { if (/^entry\.\d+$/.test(k)) ids[v.trim().toUpperCase()] = k; });
+      if (!['NAME', 'GRADE', 'INTEREST', 'EMAIL'].every(n => ids[n])) return null;
+      return { action: u.origin + u.pathname.replace(/\/viewform$/, '/formResponse'), ids };
+    } catch (e) { return null; }
+  }
+
   /* ---------- join form ---------- */
   const form = $('#joinForm');
   const fields = {
     name: v => v.trim().split(/\s+/).length >= 2 && v.trim().length >= 3,
     grade: v => v !== '',
     interest: v => v !== '',
-    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+    consent: v => v === true
   };
   function check(id) {
     const el = document.getElementById(id);
-    const ok = fields[id](el.value);
+    const ok = fields[id](el.type === 'checkbox' ? el.checked : el.value);
     el.closest('.field').classList.toggle('invalid', !ok);
     el.setAttribute('aria-invalid', !ok);
     return ok;
   }
   Object.keys(fields).forEach(id => {
     const el = document.getElementById(id);
+    if (el.type === 'checkbox') { el.addEventListener('change', () => check(id)); return; }
     el.addEventListener('blur', () => { if (el.value) check(id); });
     el.addEventListener('input', () => { if (el.closest('.field').classList.contains('invalid')) check(id); });
   });
@@ -857,42 +973,54 @@ const CONFIG = {
 
     signupBtn.disabled = true; signupBtn.textContent = 'Sending…';
     try {
-      const res = await fetch('https://formsubmit.co/ajax/' + CONFIG.signupTo, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          'Name': data.name.trim(),
-          'Grade': data.grade,
-          'Area of interest': data.interest,
-          email: data.email.trim(),               // also sets Reply-To, so you can reply to the student directly
-          _subject: 'New club sign-up: ' + data.name.trim(),
-          ...(CONFIG.signupCc ? { _cc: CONFIG.signupCc } : {}),
-          _template: 'table',
-          _honey: data._honey || ''
-        })
-      });
-      const out = await res.json().catch(() => ({}));
-      if (!res.ok || String(out.success) === 'false') {
-        const e = new Error(out.message || ('Request failed with status ' + res.status));
-        e.fromService = !!out.message;
-        throw e;
+      if (data._honey) throw new Error('spam');            // hidden field only bots fill in
+      const gf = parseGoogleForm(CONFIG.googleFormPrefill);
+      if (gf) {
+        const body = new URLSearchParams();
+        body.append(gf.ids.NAME, data.name.trim());
+        body.append(gf.ids.GRADE, data.grade);
+        body.append(gf.ids.INTEREST, data.interest);
+        body.append(gf.ids.EMAIL, data.email.trim());
+        // Google Forms doesn't allow reading the reply from another site ("no-cors"),
+        // so a completed request counts as sent; a network failure still throws.
+        await fetch(gf.action, { method: 'POST', mode: 'no-cors', body });
+      } else if (CONFIG.signupTo) {
+        const res = await fetch('https://formsubmit.co/ajax/' + CONFIG.signupTo, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            'Name': data.name.trim(),
+            'Grade': data.grade,
+            'Area of interest': data.interest,
+            email: data.email.trim(),               // also sets Reply-To, so you can reply to the student
+            _subject: 'New club sign-up: ' + data.name.trim(),
+            _template: 'table',
+            _honey: ''
+          })
+        });
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok || String(out.success) === 'false') {
+          const e = new Error(out.message || ('Request failed with status ' + res.status));
+          e.fromService = !!out.message;
+          throw e;
+        }
+      } else {
+        throw new Error('not-configured');
       }
     } catch (err) {
       console.error('Sign-up error:', err);
-      const msg = String(err.message || '');
-      if (/activat/i.test(msg)) {
-        // First-ever submission: FormSubmit has just emailed the club account an activation link
-        formError.textContent = 'Almost there: the club email needs a one-time activation. Check whsmotorsportandstemclub@gmail.com (including Spam) for an email from FormSubmit, click "Activate Form," then submit again.';
-      } else if (location.protocol === 'file:') {
-        formError.textContent = 'Sign-ups only work on the live website, not when the file is opened from your computer.';
-      } else if (err.fromService) {
-        formError.textContent = 'Sign-up failed: ' + msg + ' Please try again, or message us on Instagram.';
-      } else {
-        formError.textContent = "Sorry, your sign-up didn't go through. Check your connection and try again, or message us on Instagram.";
+      if (err.message === 'spam') { /* quietly ignore bots */ }
+      else {
+        const msg = String(err.message || '');
+        formError.textContent =
+          msg === 'not-configured' ? 'Sign-ups are being set up right now. Please message us on Instagram for now.'
+          : /activat/i.test(msg) ? 'Almost there: the club email needs a one-time activation. Check whsmotorsportandstemclub@gmail.com (including Spam) for an email from FormSubmit, click "Activate Form," then submit again.'
+          : err.fromService ? 'Sign-up failed: ' + msg + ' Please try again, or message us on Instagram.'
+          : "Sorry, your sign-up didn't go through. Check your connection and try again, or message us on Instagram.";
+        formError.hidden = false;
+        signupBtn.disabled = false; signupBtn.textContent = 'Sign me up';
+        return;
       }
-      formError.hidden = false;
-      signupBtn.disabled = false; signupBtn.textContent = 'Sign me up';
-      return;
     }
     signupBtn.disabled = false; signupBtn.textContent = 'Sign me up';
     $('#successTitle').textContent = "You're signed up, " + first + '.';
@@ -1026,6 +1154,261 @@ const CONFIG = {
   setTimeout(() => requestAnimationFrame(frame), 1500);
 })();
 </script>
+<script>
+/* ================= CINEMATIC HERO PHOTOS + SECTION ENTRANCES ================= */
+(function () {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.querySelector('.hero');
+  const box = document.getElementById('heroPhotos');
+  const credit = document.getElementById('photoCredit');
+  const photos = ((typeof CONFIG !== 'undefined' && CONFIG.heroPhotos) || []).filter(p => p && p.src);
+
+  /* --- section entrances: content rises in, a light streak runs along the top edge --- */
+  const sections = [...document.querySelectorAll('main .section')];
+  if (!reduce && 'IntersectionObserver' in window) {
+    sections.forEach(sec => sec.querySelectorAll(':scope > .wrap > *').forEach((el, i) => {
+      el.classList.add('reveal'); el.style.transitionDelay = Math.min(i, 3) * 0.12 + 's';
+    }));
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('seen');
+      e.target.querySelectorAll('.reveal').forEach(el => el.classList.add('seen'));
+      io.unobserve(e.target);
+    }), { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    sections.forEach(sec => io.observe(sec));
+  }
+
+  if (!hero || !box || !photos.length) return;
+
+  /* --- film grain, generated once (no image file) --- */
+  const gc = document.createElement('canvas'); gc.width = gc.height = 180;
+  const gx = gc.getContext('2d'), img = gx.createImageData(180, 180);
+  for (let i = 0; i < img.data.length; i += 4) { const v = Math.random() * 255; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 255; }
+  gx.putImageData(img, 0, 0);
+  document.getElementById('heroGrain').style.backgroundImage = 'url(' + gc.toDataURL('image/png') + ')';
+
+  const sweep = document.getElementById('heroSweep');
+  const HOLD = 7000;                                   // ms each shot stays on screen
+  const shots = photos.map((p, i) => {
+    const el = document.createElement('div');
+    el.className = 'shot ' + (i % 2 ? 'drift-r' : 'drift-l');
+    el.style.setProperty('--dur', (HOLD + 1600) / 1000 + 's');
+    el.dataset.src = p.src;
+    box.insertBefore(el, sweep);
+    return el;
+  });
+  // Ask Unsplash's image service for just enough pixels to cover the hero on this screen
+  function photoURL(p) {
+    if (!/^https:\/\/images\.unsplash\.com\//.test(p.src)) return p.src;
+    const r = hero.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const need = Math.max(r.width, r.height * 1.5) * dpr * 1.15;      // 1.15 leaves room for the slow zoom
+    const cap = r.width < 920 ? 1600 : 2400;                         // phones: the photo sits under a dark shade, so less detail is fine
+    const w = Math.min(cap, [960, 1280, 1600, 1920, 2400].find(x => x >= need) || 2400);
+    return p.src + '?ixlib=rb-4.1.0&fm=jpg&q=72&fit=max&auto=format&cs=srgb&w=' + w;
+  }
+  const loaded = new Map();
+  function load(i) {
+    const p = photos[i], url = photoURL(p);
+    if (!loaded.has(i)) loaded.set(i, new Promise(res => {
+      const im = new Image();
+      im.decoding = 'async';
+      im.onload = () => { shots[i].style.backgroundImage = 'url("' + url + '")'; res(true); };
+      im.onerror = () => { console.warn('Hero photo could not load:', url); res(false); };
+      im.src = url;
+    }));
+    return loaded.get(i);
+  }
+  // "Photo: Name / Unsplash", linked the way Unsplash asks
+  function setCredit(i) {
+    const p = photos[i];
+    credit.textContent = '';
+    if (p.credit) { credit.textContent = p.credit; return; }
+    if (!p.name) return;
+    const utm = '?utm_source=whs_motorsport_stem_club&utm_medium=referral';
+    const link = (href, text) => { const a = document.createElement('a'); a.href = href; a.textContent = text; a.target = '_blank'; a.rel = 'noopener'; return a; };
+    credit.append('Photo: ', p.user ? link('https://unsplash.com/@' + p.user + utm, p.name) : p.name, ' / ', link('https://unsplash.com/' + utm, 'Unsplash'));
+  }
+
+  let cur = 0, vis = 0, timer = null, inView = true;   // cur = position in the list, vis = shot on screen
+  load(0).then(ok => {
+    if (!ok) return;                                    // photo missing: keep the drawn-car background
+    hero.classList.add('has-photos');
+    shots[0].classList.add('live'); setCredit(0);
+    requestAnimationFrame(() => hero.classList.add('rolling'));
+    if (photos.length > 1) load(1);
+    if (!reduce && photos.length > 1) schedule();
+  });
+
+  function schedule() { clearTimeout(timer); timer = setTimeout(next, HOLD); }
+  async function next() {
+    if (!inView || document.hidden) { timer = null; return; }
+    const n = (cur + 1) % photos.length;
+    if (n !== vis && !(await load(n))) { cur = n; return next(); }   // photo missing: skip straight to the next one
+    if (n === vis) { cur = n; return schedule(); }     // only one photo loaded: nothing to switch to
+    const a = shots[vis], b = shots[n];
+    a.className = a.className.replace(/\b(live|in)\b/g, '').trim() + ' out';
+    b.className = b.className.replace(/\b(out|live|in)\b/g, '').trim();
+    void b.offsetWidth;                                 // restart the animations
+    shots.forEach(sh => { sh.style.zIndex = 0; });
+    b.classList.add('in'); b.style.zIndex = 1;
+    sweep.classList.remove('go'); void sweep.offsetWidth; sweep.classList.add('go');
+    setCredit(n);
+    setTimeout(() => { a.className = a.className.replace(/\bout\b/, '').trim(); }, 1200);
+    cur = vis = n;
+    load((n + 1) % photos.length);
+    schedule();
+  }
+  // pause when the hero is off-screen or the tab is hidden
+  new IntersectionObserver(([e]) => {
+    inView = e.isIntersecting;
+    box.style.animationPlayState = inView ? 'running' : 'paused';
+    if (inView && !timer && !reduce && photos.length > 1 && hero.classList.contains('has-photos')) schedule();
+  }).observe(hero);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && inView && !reduce && photos.length > 1 && hero.classList.contains('has-photos')) schedule();
+  });
+})();
+</script>
+
+<script>
+/* ================= HERO BACKGROUND: cars racing past in three depth layers =================
+   Plain 2D canvas: no video, no images, a few KB. Pauses off-screen and in hidden tabs,
+   and shows a still frame when the visitor prefers reduced motion. */
+(function () {
+  const hero = document.querySelector('.hero'), cv = document.getElementById('heroBg');
+  if (!hero || !cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const textBlock = hero.querySelector('.wrap > div');
+
+  // Original open-wheel race car silhouette, 100 units long, ground at y = 0, nose on the right
+  const BODY = new Path2D('M2 -5 L2 -20 Q2 -21 3 -21 L10 -21 L10 -15 L13 -12.5 L30 -13 L38 -16.5 Q40 -17.6 43 -17.4 L46 -13.5 L57 -12.5 L70 -10.2 L86 -6.4 L95 -5.2 Q96.5 -5 96.5 -4 L96.5 -3.2 L100 -3.2 L100 -1.2 L83 -1.2 L83 -3 L10 -3 L8 -5 Z');
+  const STRIPE = new Path2D('M13 -8.6 L42 -9.6 L70 -7.6 L90 -5');
+  const HALO = new Path2D('M46.5 -14.6 Q52 -18 59 -13.2');
+  const WHEELS = [22, 77];
+
+  const COLORS = { crimson: [224, 34, 58], cyan: [47, 214, 238], white: [235, 238, 242] };
+  const LANES = [
+    { scale: 0.34, alpha: 0.3, speed: 0.17, gap: [1.6, 3.4] },   // far: faint, behind the content
+    { scale: 0.6, alpha: 0.7, speed: 0.32, gap: [1.3, 2.8] },    // mid: in the track strip
+    { scale: 1.0, alpha: 0.9, speed: 0.6, gap: [1.8, 3.8] }      // near: in the track strip
+  ];
+  let W = 0, H = 0, dpr = 1, band = 0, carLen = 300, mobile = false;
+  let lines = [], kerb = 0, last = null, running = false, visible = false;
+
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const pickColor = () => { const r = Math.random(); return r < 0.5 ? 'crimson' : r < 0.85 ? 'cyan' : 'white'; };
+  const trailFor = lane => carLen * lane.scale * (1.4 + lane.speed * 4);
+
+  function resize() {
+    const r = hero.getBoundingClientRect();
+    mobile = r.width < 920;
+    dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.5);
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    // on phones the hero stacks text over the telemetry card, so keep the cars behind the text
+    band = mobile && textBlock ? Math.min(H, textBlock.offsetTop + textBlock.offsetHeight + 24) : H;
+    LANES[0].gy = mobile ? band * 0.6 : H * 0.46;
+    LANES[1].gy = H - (mobile ? 74 : 98);
+    LANES[2].gy = H - (mobile ? 18 : 26);
+    carLen = Math.max(140, Math.min(mobile ? 220 : 400, W * (mobile ? 0.5 : 0.3)));
+    lines = Array.from({ length: mobile ? 10 : 22 }, () => ({
+      y: rand(0.08, 0.98) * H, len: rand(40, 220), v: rand(0.5, 1.4), a: rand(0.04, 0.11), c: Math.random() < 0.3 ? 'cyan' : 'white', x: rand(0, W)
+    }));
+    LANES.forEach(l => {                     // spread cars across the screen so it never starts empty
+      l.cars = []; let x = rand(-0.2, 0.3) * W;
+      while (x < W * 1.1) { l.cars.push({ x, color: pickColor(), spin: rand(0, 6.28) }); x += carLen * l.scale + W * l.speed * rand(...l.gap); }
+      l.next = rand(0.3, 1.5);
+    });
+    draw(0);
+  }
+
+  function drawCar(x, gy, k, color, spin, alpha) {
+    const [r, g, b] = COLORS[color];
+    ctx.save(); ctx.translate(x, gy); ctx.scale(k, k);
+    ctx.globalAlpha = alpha;
+    const grad = ctx.createLinearGradient(0, -21, 0, 0);
+    grad.addColorStop(0, '#30353c'); grad.addColorStop(0.6, '#1b1e22'); grad.addColorStop(1, '#0e1012');
+    ctx.fillStyle = grad; ctx.fill(BODY);
+    ctx.lineWidth = 0.55; ctx.strokeStyle = `rgba(${r},${g},${b},0.55)`; ctx.stroke(BODY);
+    ctx.lineWidth = 1.3; ctx.strokeStyle = `rgba(${r},${g},${b},0.95)`; ctx.stroke(STRIPE);
+    ctx.lineWidth = 1.1; ctx.strokeStyle = '#0b0c0e'; ctx.stroke(HALO);
+    ctx.fillStyle = 'rgba(240,242,245,0.85)'; ctx.beginPath(); ctx.arc(51.5, -14.6, 2.1, 0, 6.283); ctx.fill();
+    WHEELS.forEach(wx => {
+      ctx.fillStyle = '#0a0b0c'; ctx.beginPath(); ctx.arc(wx, -6.5, 6.5, 0, 6.283); ctx.fill();
+      ctx.lineWidth = 0.7; ctx.strokeStyle = `rgba(${r},${g},${b},0.6)`; ctx.beginPath(); ctx.arc(wx, -6.5, 4.4, 0, 6.283); ctx.stroke();
+      ctx.lineWidth = 0.9; ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+      ctx.beginPath(); ctx.moveTo(wx, -6.5); ctx.lineTo(wx + Math.cos(spin) * 3.6, -6.5 + Math.sin(spin) * 3.6); ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  function drawTrail(x, gy, k, len, color, alpha) {
+    const [r, g, b] = COLORS[color];
+    const y = gy - 7 * k;
+    const glow = ctx.createLinearGradient(x - len, 0, x + 4 * k, 0);
+    glow.addColorStop(0, `rgba(${r},${g},${b},0)`); glow.addColorStop(1, `rgba(${r},${g},${b},${0.16 * alpha})`);
+    ctx.fillStyle = glow; ctx.fillRect(x - len, y - 7 * k, len + 4 * k, 12 * k);
+    const core = ctx.createLinearGradient(x - len, 0, x + 4 * k, 0);
+    core.addColorStop(0, `rgba(${r},${g},${b},0)`); core.addColorStop(1, `rgba(${r},${g},${b},${0.85 * alpha})`);
+    ctx.fillStyle = core; ctx.fillRect(x - len, y - 0.9 * k, len + 4 * k, 1.8 * k);
+  }
+
+  function draw(dt) {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    // faint crimson glow toward the right, like trackside lights
+    const glow = ctx.createRadialGradient(W * 0.75, H * 0.85, 0, W * 0.75, H * 0.85, Math.max(W, H) * 0.6);
+    glow.addColorStop(0, 'rgba(224,34,58,0.10)'); glow.addColorStop(1, 'rgba(224,34,58,0)');
+    ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
+    // speed lines
+    lines.forEach(l => {
+      l.x += l.v * W * dt; if (l.x - l.len > W) { l.x = -rand(0, W * 0.3); l.y = rand(0.08, 0.98) * H; }
+      const c = COLORS[l.c], gr = ctx.createLinearGradient(l.x - l.len, 0, l.x, 0);
+      gr.addColorStop(0, `rgba(${c[0]},${c[1]},${c[2]},0)`); gr.addColorStop(1, `rgba(${c[0]},${c[1]},${c[2]},${l.a})`);
+      ctx.fillStyle = gr; ctx.fillRect(l.x - l.len, l.y, l.len, 1);
+    });
+    LANES.forEach((lane, li) => {
+      const gy = lane.gy, k = carLen * lane.scale / 100, v = lane.speed * W, fade = 1;
+      // track edge line, plus moving red/white kerb on the nearest lane
+      ctx.fillStyle = `rgba(255,255,255,${0.05 + li * 0.02})`; ctx.fillRect(0, gy + 0.5, W, 1);
+      if (li === 2) {
+        kerb = (kerb + v * dt) % (36 * k);
+        for (let x = -36 * k + kerb; x < W; x += 36 * k) {
+          ctx.fillStyle = 'rgba(224,34,58,0.22)'; ctx.fillRect(x, gy + 3 * k, 18 * k, 2.2 * k);
+          ctx.fillStyle = 'rgba(245,247,250,0.14)'; ctx.fillRect(x + 18 * k, gy + 3 * k, 18 * k, 2.2 * k);
+        }
+      }
+      // spawn and move cars
+      lane.next -= dt;
+      if (lane.next <= 0) { lane.cars.push({ x: -carLen * lane.scale - 10, color: pickColor(), spin: 0 }); lane.next = rand(...lane.gap); }
+      const trail = trailFor(lane);
+      lane.cars.forEach(c => {
+        c.x += v * dt; c.spin += (v * dt) / (6.5 * k);
+        drawTrail(c.x, gy, k, trail, c.color, lane.alpha * fade);
+        drawCar(c.x, gy, k, c.color, c.spin, lane.alpha * fade);
+      });
+      lane.cars = lane.cars.filter(c => c.x - trail < W);
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  function frame(t) {
+    if (!visible || document.hidden || hero.classList.contains('has-photos')) { running = false; last = null; return; }
+    const dt = last === null ? 0 : Math.min(0.05, (t - last) / 1000);
+    last = t; draw(dt);
+    requestAnimationFrame(frame);
+  }
+  function start() { if (reduce || running || !visible || document.hidden) return; running = true; last = null; requestAnimationFrame(frame); }
+
+  new ResizeObserver(() => resize()).observe(hero);
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; start(); }, { threshold: 0 }).observe(hero);
+  document.addEventListener('visibilitychange', start);
+  resize();
+  requestAnimationFrame(() => cv.classList.add('ready'));
+})();
+</script>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
