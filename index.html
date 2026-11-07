@@ -299,7 +299,7 @@ input:focus,select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 
 .why p{color:var(--muted);font-size:1rem}
 .sponsor-cta{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:28px 32px;border:1px solid var(--line);border-radius:14px}
 .sponsor-cta p{color:var(--muted);max-width:56ch}
-@media (max-width:920px){.why,
+@media (max-width:920px){.why{grid-template-columns:1fr;gap:24px}}
 /* footer */
 footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
@@ -316,6 +316,221 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--white);color:var(--carbon);padding:12px 20px;border-radius:8px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:80}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+/* =====================================================================
+   REDESIGN LAYER: full-bleed photography, giant type, glass panels
+   ===================================================================== */
+:root{--ink:#0d0e10;--glass:rgba(16,18,21,.5);--hair:rgba(255,255,255,.1)}
+html{overflow-x:hidden}
+body{background:var(--ink)}
+::selection{background:var(--crimson);color:#fff}
+.wrap{width:min(1240px,100% - 48px)}
+.section{border-top:0;padding:128px 0}
+@media (max-width:640px){.section{padding:88px 0}.wrap{width:calc(100% - 32px)}}
+h2{font-size:clamp(2.8rem,6.6vw,5.8rem);text-transform:uppercase;line-height:.88;letter-spacing:-.005em;text-wrap:balance}
+.kicker{display:inline-flex;align-items:center;gap:12px;margin:0;font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+.kicker::before{content:"";width:28px;height:1px;background:currentColor}
+.section-head{gap:16px;margin-bottom:60px}
+.lede{font-size:clamp(1.08rem,1.3vw,1.25rem)}
+
+/* buttons: pills with glow */
+.btn{border-radius:999px;padding:0 30px;min-height:52px;text-transform:uppercase;font-size:1.15rem;letter-spacing:.06em}
+.btn-primary{box-shadow:0 14px 34px -14px rgba(224,34,58,.9),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 40px -14px rgba(224,34,58,1),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-ghost{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.22);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+.btn-sm{min-height:44px;padding:0 20px;font-size:1rem}
+
+/* photo credits */
+.credit{font-size:.74rem;line-height:1.3;color:rgba(245,247,250,.72);text-shadow:0 1px 3px rgba(0,0,0,.9)}
+.credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.credit a:hover{color:#fff}
+
+/* ---------- nav: clear over the hero, glass once you scroll ---------- */
+.nav{background:transparent;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;transition:background-color .35s,border-color .35s}
+.nav.solid{background:rgba(13,14,16,.78);border-bottom-color:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3)}
+.nav-links a{color:rgba(245,247,250,.8)}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(var(--p,0));background:linear-gradient(90deg,var(--crimson),#fff 70%,var(--cyan));pointer-events:none}
+.menu-btn{background:rgba(13,14,16,.4);border-color:rgba(255,255,255,.2)}
+@media (max-width:920px){.nav-links{background:rgba(13,14,16,.97)}}
+
+/* ---------- hero: full screen, giant type ---------- */
+.hero{margin-top:calc(var(--nav-h) * -1);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--nav-h) + 56px) 0 128px;background:var(--ink)}
+.hero.has-photos{padding-bottom:128px}
+.hero .wrap{grid-template-columns:minmax(0,1.5fr) minmax(0,.78fr);gap:48px;align-items:end}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 24px;padding:8px 16px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(13,14,16,.4);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,247,250,.88)}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--crimson);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,34,58,.75)}70%{box-shadow:0 0 0 10px rgba(224,34,58,0)}100%{box-shadow:0 0 0 0 rgba(224,34,58,0)}}
+.hero h1{font-size:clamp(3rem,7.4vw,8.4rem);line-height:.86;text-transform:uppercase;letter-spacing:-.012em;text-wrap:wrap;text-shadow:0 4px 40px rgba(0,0,0,.35)}
+.h-line{display:block;white-space:nowrap;padding-right:.1em;animation:lineIn 1.1s cubic-bezier(.16,1,.3,1) both}
+.h-line:nth-child(2){animation-delay:.12s}.h-line:nth-child(3){animation-delay:.24s}
+@keyframes lineIn{from{opacity:0;transform:translateY(.4em) skewY(3deg)}to{opacity:1;transform:none}}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .h-accent{background:linear-gradient(95deg,#ffffff 0%,#ffc2ca 28%,var(--crimson) 64%,#ff6b7d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+}
+@supports (-webkit-text-stroke:2px #fff){
+  .h-outline{color:transparent;-webkit-text-stroke:2px rgba(245,247,250,.95);text-shadow:none}
+}
+.hero .lede{margin-top:28px;color:rgba(245,247,250,.84);max-width:44ch}
+.hero-ctas{margin-top:34px}
+.hero-meet{color:rgba(245,247,250,.72)}
+.hero .telemetry{margin:0;background:var(--glass);border:1px solid rgba(255,255,255,.12);border-radius:20px;-webkit-backdrop-filter:blur(18px) saturate(1.25);backdrop-filter:blur(18px) saturate(1.25);box-shadow:0 40px 90px -30px rgba(0,0,0,.75)}
+.hero .readout{background:rgba(0,0,0,.3);border-color:rgba(255,255,255,.08);border-radius:10px}
+.hero.has-photos .hero-shade{background:
+  linear-gradient(90deg,rgba(13,14,16,.88) 0%,rgba(13,14,16,.6) 38%,rgba(13,14,16,.12) 70%,rgba(13,14,16,.2) 100%),
+  linear-gradient(180deg,rgba(13,14,16,.6) 0%,rgba(13,14,16,0) 26%,rgba(13,14,16,0) 62%,var(--ink) 100%)}
+.scroll-cue{position:absolute;left:50%;bottom:62px;z-index:6;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(245,247,250,.75);text-decoration:none;font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase}
+.scroll-cue i{width:1px;height:44px;background:linear-gradient(rgba(245,247,250,.8),rgba(245,247,250,0));position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;left:-1px;top:-14px;width:3px;height:14px;background:var(--crimson);animation:drip 1.8s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes drip{to{top:44px}}
+.photo-credit{bottom:38px}
+@media (max-width:920px){
+  .hero{padding:calc(var(--nav-h) + 36px) 0 112px;justify-content:flex-start}
+  .hero.has-photos{padding-bottom:112px}
+  .hero .wrap{grid-template-columns:1fr;gap:40px;width:calc(100% - 32px)}
+  .hero.has-photos .hero-shade{background:linear-gradient(180deg,rgba(13,14,16,.78) 0%,rgba(13,14,16,.55) 40%,rgba(13,14,16,.82) 75%,var(--ink) 100%)}
+  .scroll-cue{display:none}
+  .photo-credit{bottom:20px}
+}
+@media (max-width:640px){.hero h1{font-size:12vw}.eb-extra{display:none}.eyebrow{letter-spacing:.12em}}
+
+/* ---------- ticker tapes (crossing) ---------- */
+.tapes{position:relative;z-index:4;height:150px;margin:-92px 0 -40px;overflow:hidden;pointer-events:none}
+.tape{position:absolute;left:-5%;right:-5%;top:50%;padding:16px 0;overflow:hidden}
+.tape-a{background:var(--crimson);color:#fff;transform:translateY(-50%) rotate(-2.4deg);box-shadow:0 20px 50px -20px rgba(224,34,58,.7)}
+.tape-b{background:var(--white);color:var(--ink);transform:translateY(-50%) rotate(2deg)}
+.tape-track{display:flex;width:max-content;animation:tick 38s linear infinite}
+.tape-b .tape-track{animation-duration:46s;animation-direction:reverse}
+.tape span{display:flex;align-items:center;gap:30px;padding-right:30px;white-space:nowrap;font:italic 800 clamp(1.3rem,2.4vw,2.1rem)/1 var(--display);text-transform:uppercase;letter-spacing:.03em}
+.tape span::after{content:"";width:9px;height:9px;background:currentColor;transform:rotate(45deg)}
+@keyframes tick{to{transform:translateX(-50%)}}
+@media (max-width:640px){.tapes{height:110px;margin:-64px 0 -24px}.tape{padding:11px 0}}
+
+/* ---------- statement: words light up as you scroll ---------- */
+.statement{position:relative;height:230vh;background:var(--ink)}
+.statement-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center}
+.statement-bg{position:absolute;inset:0;background:#111}
+.statement-bg img{width:100%;height:100%;object-fit:cover;object-position:62% 40%;transform:scale(calc(1.2 - var(--sp,0) * .16));filter:saturate(.8) contrast(1.12) brightness(.58);will-change:transform}
+.statement-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,14,16,.94) 0%,rgba(13,14,16,.62) 52%,rgba(13,14,16,.3) 100%),linear-gradient(180deg,var(--ink) 0%,rgba(13,14,16,0) 20%,rgba(13,14,16,0) 80%,var(--ink) 100%)}
+.statement-inner{position:relative;z-index:1}
+.statement-inner .kicker{margin-bottom:28px}
+.statement-text{margin:0;max-width:19ch;font:italic 800 clamp(2.2rem,4.5vw,4.8rem)/.95 var(--display);text-transform:uppercase;letter-spacing:-.005em}
+.statement-text .w{opacity:.14;transition:opacity .4s ease,color .4s ease}
+.statement-text .w.lit{opacity:1}
+.statement-text .w.hot.lit{color:var(--crimson)}
+.statement-credit{position:absolute;right:16px;bottom:16px;z-index:1}
+.statement.static{height:auto}
+.statement.static .statement-pin{position:relative;height:auto;min-height:80vh;padding:140px 0}
+.statement.static .statement-text .w{opacity:1}
+
+/* ---------- about pillars: glass cards with a cursor spotlight ---------- */
+.about-copy p:first-child{font:italic 700 clamp(1.7rem,2.6vw,2.3rem)/1.08 var(--display);text-transform:uppercase;color:var(--white)}
+.pillars{border:0;gap:14px;counter-reset:p}
+.pillars li{position:relative;counter-increment:p;border:1px solid var(--hair);border-radius:20px;padding:30px 26px 32px;overflow:hidden;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,-20%),rgba(47,214,238,.13),transparent 50%),linear-gradient(180deg,#17191d,#111316);
+  transition:border-color .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.pillars li:hover{border-color:rgba(47,214,238,.38);transform:translateY(-4px)}
+.pillars li::after{content:"0" counter(p);position:absolute;right:18px;top:10px;font:italic 800 3.6rem/1 var(--display);color:rgba(255,255,255,.06)}
+.pillars svg{width:40px;height:40px;padding:8px;border-radius:12px;background:rgba(47,214,238,.1)}
+
+/* ---------- garage ---------- */
+.stage-wrap{border-radius:22px;border-color:var(--hair);box-shadow:0 50px 110px -50px rgba(47,214,238,.35)}
+.part-info{border-radius:18px;border-color:var(--hair);background:linear-gradient(180deg,#17191d,#121417)}
+.part-btn{border-radius:12px}
+
+/* ---------- project photo cards ---------- */
+.projects{gap:22px}
+.project{position:relative;background:#131518;border:1px solid var(--hair);border-radius:22px;transition:border-color .3s,transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.project:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.2);box-shadow:0 40px 70px -35px rgba(0,0,0,.9),0 0 0 1px rgba(224,34,58,.3)}
+.project-art{position:relative;display:block;height:auto;aspect-ratio:4/3;background:linear-gradient(135deg,#22262b,#15171a);border-bottom:0;overflow:hidden}
+.project-art img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);filter:saturate(.85) contrast(1.06) brightness(.82);transition:transform 1.4s cubic-bezier(.2,.8,.2,1),filter .6s}
+.project:hover .project-art img{transform:scale(1.13);filter:saturate(1.05) contrast(1.08) brightness(.95)}
+.project-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,14,16,.35) 0%,rgba(13,14,16,0) 30%,rgba(19,21,24,0) 55%,#131518 100%);pointer-events:none}
+.project-num{position:absolute;top:14px;left:18px;z-index:1;font:italic 800 1.5rem/1 var(--display);color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.project-art .credit{position:absolute;left:18px;bottom:8px;z-index:1}
+.project .status{position:absolute;top:14px;right:14px;z-index:2;display:inline-flex;align-items:center;gap:7px;padding:5px 12px;background:rgba(13,14,16,.62);border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.project .status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.project .status-active{color:var(--cyan)}
+.project .status-planned{color:#d3d8de}
+.project-body{padding:6px 24px 24px}
+.project h3{font-size:1.9rem;text-transform:uppercase;font-style:italic;font-weight:800}
+.filter{border-color:var(--hair)}
+
+/* ---------- gallery: pinned horizontal film strip ---------- */
+.gallery{position:relative;background:var(--ink)}
+.gallery-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:36px;padding-top:var(--nav-h)}
+.gallery-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap}
+.gallery-head > div{display:flex;flex-direction:column;gap:16px}
+.gallery-head .lede{max-width:40ch}
+.gallery-track{display:flex;gap:22px;width:max-content;padding:0 max(24px,calc((100vw - 1240px) / 2));will-change:transform}
+.frame{position:relative;flex:none;margin:0;height:min(56vh,520px);aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#22262b,#15171a);border:1px solid var(--hair)}
+.frame.tall{aspect-ratio:3/4}
+.frame img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.08) brightness(.8);transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.frame:hover img{transform:scale(1.06)}
+.frame figcaption{position:absolute;left:0;right:0;bottom:0;padding:70px 24px 18px;display:flex;flex-direction:column;gap:6px;background:linear-gradient(180deg,rgba(13,14,16,0),rgba(13,14,16,.92) 60%)}
+.frame-num{font-family:var(--mono);font-size:.74rem;letter-spacing:.2em;color:var(--cyan)}
+.frame b{font:italic 800 clamp(1.8rem,2.6vw,2.6rem)/.95 var(--display);text-transform:uppercase}
+.frame-text{color:rgba(245,247,250,.8);font-size:.98rem;max-width:40ch}
+.frame figcaption .credit{margin-top:6px}
+.frame-cta{aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:28px;text-decoration:none;color:#fff;border:0;
+  background:radial-gradient(circle at 80% 10%,rgba(255,255,255,.25),transparent 45%),linear-gradient(160deg,var(--crimson),#7d0b1b)}
+.frame-cta .frame-num{color:rgba(255,255,255,.8)}
+.frame-cta b{font-size:clamp(2.2rem,3.4vw,3.4rem)}
+.frame-cta .frame-text{color:rgba(255,255,255,.9)}
+.cta-arrow{font-size:2.6rem;line-height:1;transition:transform .3s}
+.frame-cta:hover .cta-arrow{transform:translateX(10px)}
+.gallery.native .gallery-pin{position:relative;height:auto;padding:110px 0 96px}
+.gallery.native .gallery-track{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:12px;transform:none!important;scrollbar-width:thin}
+.gallery.native .frame{scroll-snap-align:center}
+@media (max-width:759px){
+  .gallery.native .gallery-track{padding:0 16px 12px;gap:14px}
+  .gallery.native .frame,.gallery.native .frame.tall,.gallery.native .frame-cta{height:auto;width:82vw;aspect-ratio:4/5}
+}
+
+/* ---------- schedule card with photo ---------- */
+.regular{position:relative;overflow:hidden;isolation:isolate;border-radius:22px;background:#9e1426}
+.regular-bg{position:absolute;inset:0;z-index:-2}
+.regular-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(.3) contrast(1.15) brightness(.75)}
+.regular::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(165deg,rgba(224,34,58,.9) 0%,rgba(170,18,40,.78) 45%,rgba(40,4,10,.85) 100%)}
+.regular .big{font-size:clamp(3.2rem,6.4vw,5.2rem);text-transform:uppercase}
+.regular-credit{color:rgba(255,255,255,.8)}
+.tab[aria-selected="true"]{border-bottom-color:var(--crimson)}
+
+/* ---------- join photo ---------- */
+.join-photo{position:relative;margin:0;border-radius:22px;overflow:hidden;aspect-ratio:16/11;background:linear-gradient(135deg,#22262b,#15171a);border:1px solid var(--hair)}
+.join-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:saturate(.85) contrast(1.08) brightness(.8)}
+.join-photo figcaption{position:absolute;inset:auto 0 0 0;padding:80px 24px 16px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;background:linear-gradient(180deg,rgba(13,14,16,0),rgba(13,14,16,.88))}
+.join-big{font:italic 800 clamp(2.4rem,4.4vw,3.8rem)/.9 var(--display);text-transform:uppercase}
+form{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border-color:var(--hair);border-radius:22px;box-shadow:0 40px 90px -50px rgba(224,34,58,.45)}
+input,select{border-radius:12px;background:rgba(13,14,16,.7)}
+.classroom{border-radius:18px;border-color:var(--hair)}
+
+/* ---------- sponsor over carbon texture ---------- */
+#sponsor{background:linear-gradient(180deg,var(--ink) 0%,rgba(13,14,16,.84) 22%,rgba(13,14,16,.9) 100%),url("https://images.unsplash.com/photo-1637004732258-4b792ce8f474?ixlib=rb-4.1.0&auto=format&fit=max&q=60&w=1600") center/cover #111}
+.why div{border-top-color:var(--crimson)}
+.sponsor-cta{border-radius:22px;border-color:var(--hair);background:rgba(13,14,16,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+
+/* ---------- footer: giant wordmark ---------- */
+footer{position:relative;overflow:hidden;background:#0a0b0d;border-top:1px solid rgba(255,255,255,.06);padding-top:0}
+.mega{margin:0 0 56px;padding-top:40px;text-align:center;white-space:nowrap;font:italic 800 13.6vw/.8 var(--display);text-transform:uppercase;letter-spacing:-.02em;color:rgba(245,247,250,.08)}
+@supports (-webkit-text-stroke:1px #fff){.mega{color:transparent;-webkit-text-stroke:1px rgba(245,247,250,.3)}}
+.legal a{color:var(--white)}
+
+/* ---------- stagger cards in ---------- */
+.rise{opacity:0;transform:translateY(34px) scale(.98);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0) * 90ms)}
+.rise.seen{opacity:1;transform:none}
+
+/* ---------- film grain over the whole page ---------- */
+body::after{content:"";position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.04;background-image:var(--grain,none);background-size:180px 180px}
+
+@media (prefers-reduced-motion:reduce){
+  .h-line,.tape-track,.eyebrow .dot,.scroll-cue i::after{animation:none}
+  .statement{height:auto}
+  .statement-pin{position:relative;height:auto;min-height:80vh;padding:140px 0}
+  .statement-text .w{opacity:1}
+  .rise{opacity:1;transform:none;transition:none}
+  .project:hover,.pillars li:hover,.btn-primary:hover{transform:none}
+}
+
 </style>
 </head>
 <body>
@@ -343,6 +558,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 </header>
 
 <main id="main">
@@ -360,7 +576,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
   <p class="photo-credit" id="photoCredit"></p>
   <div class="wrap">
     <div>
-      <h1 id="heroTitle">We Build Things That Work <span style="display:block;white-space:nowrap">Come Join Us</span></h1>
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Winchester High School<span class="eb-extra"> &middot; Season 2026&ndash;27</span></p>
+      <h1 id="heroTitle"><span class="h-line">We Build Things</span> <span class="h-line h-accent">That Work</span> <span class="h-line h-outline">Come Join Us</span></h1>
       <p class="lede">Building the next generation of engineers, analysts, and motorsport enthusiasts at WHS.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#join">Join the Club</a>
@@ -397,11 +614,30 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
   </div>
 </section>
 
+<!-- ================= TICKER TAPES ================= -->
+<div class="tapes" aria-hidden="true">
+  <div class="tape tape-b"><div class="tape-track"><span>All levels welcome</span><span>Design</span><span>Build</span><span>Test</span><span>Race</span><span>Repeat</span><span>Join the crew</span><span>All levels welcome</span><span>Design</span><span>Build</span><span>Test</span><span>Race</span><span>Repeat</span><span>Join the crew</span></div></div>
+  <div class="tape tape-a"><div class="tape-track"><span>Sim racing</span><span>CO2 cars</span><span>Aerodynamics</span><span>Telemetry</span><span>CAD design</span><span>Race strategy</span><span>3D printing</span><span>WIN Red &middot; C206</span><span>Sim racing</span><span>CO2 cars</span><span>Aerodynamics</span><span>Telemetry</span><span>CAD design</span><span>Race strategy</span><span>3D printing</span><span>WIN Red &middot; C206</span></div></div>
+</div>
+
+<!-- ================= STATEMENT ================= -->
+<section class="statement" id="manifesto" aria-labelledby="statementText">
+  <div class="statement-pin">
+    <div class="statement-bg"><img src="https://images.unsplash.com/photo-1779808109804-d50df7c14571?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200" srcset="https://images.unsplash.com/photo-1779808109804-d50df7c14571?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1779808109804-d50df7c14571?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w, https://images.unsplash.com/photo-1779808109804-d50df7c14571?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1600 1600w, https://images.unsplash.com/photo-1779808109804-d50df7c14571?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=2400 2400w" sizes="100vw" alt="A motorsport crew member in a headset sits under a single overhead light in a dark garage" loading="lazy" decoding="async"></div>
+    <div class="wrap statement-inner">
+      <p class="kicker">The mission</p>
+      <p class="statement-text" id="statementText">Every lap is a physics problem. Every part is a design decision. We take racing apart, work out why it&rsquo;s fast, and then we build our own.</p>
+    </div>
+    <span class="credit statement-credit">Photo: <a href="https://unsplash.com/@bharat05?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">BHARAT VISHAWAKARMA</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span>
+  </div>
+</section>
+
 <!-- ================= ABOUT ================= -->
 <section class="section" id="about" aria-labelledby="aboutTitle">
   <div class="wrap about-grid">
     <div>
       <div class="section-head">
+        <p class="kicker">01 &mdash; About</p>
         <h2 id="aboutTitle">About the club</h2>
       </div>
       <div class="about-copy">
@@ -439,7 +675,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 <section class="section" id="garage" aria-labelledby="garageTitle">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="garageTitle">Take apart a 2026 F1 car</h2>
+      <p class="kicker">02 &mdash; The garage</p>
+        <h2 id="garageTitle">Take apart a 2026 F1 car</h2>
       <p class="lede">Built to this season's rules. Drag to spin it, look inside at the power unit, switch the wings to straight-line mode, or pull the whole car apart.</p>
     </div>
     <div class="garage">
@@ -478,7 +715,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 <section class="section" id="projects" aria-labelledby="projTitle">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="projTitle">Divisions &amp; projects</h2>
+      <p class="kicker">03 &mdash; Divisions</p>
+        <h2 id="projTitle">Divisions &amp; projects</h2>
       <p class="lede">Pick a project, join the crew working on it, and bring your own ideas.</p>
     </div>
 
@@ -492,8 +730,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 
     <div class="projects" id="projectGrid">
       <article class="project" data-tags="data strat">
-        <div class="project-art" aria-hidden="true">
-          <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="10" width="80" height="44" rx="4"/><path d="M50 54v10M70 54v10M40 66h40"/><circle cx="60" cy="32" r="12"/><path d="M48 32h24M60 32v12"/></svg>
+        <div class="project-art">
+          <img src="https://images.unsplash.com/photo-1760553121003-93afc4d88ae0?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1760553121003-93afc4d88ae0?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1760553121003-93afc4d88ae0?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1760553121003-93afc4d88ae0?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:620px) 100vw, (max-width:980px) 50vw, 400px" alt="A driver at a racing simulator with a steering wheel and screens" loading="lazy" decoding="async">
+          <span class="project-num" aria-hidden="true">01</span>
+          <span class="credit">Photo: <a href="https://unsplash.com/@anoofc?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">ANOOF C</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span>
         </div>
         <div class="project-body">
           <span class="status status-active">Active</span>
@@ -505,8 +745,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
       </article>
 
       <article class="project" data-tags="eng aero">
-        <div class="project-art" aria-hidden="true">
-          <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 50h14l10-16h40l22 10h14v6"/><circle cx="32" cy="54" r="7"/><circle cx="92" cy="54" r="7"/><path d="M6 44h6M4 38h8"/></svg>
+        <div class="project-art">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:620px) 100vw, (max-width:980px) 50vw, 400px" alt="An engineer measures a technical drawing with a caliper" loading="lazy" decoding="async">
+          <span class="project-num" aria-hidden="true">02</span>
+          <span class="credit">Photo: <a href="https://unsplash.com/@thisisengineering?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">ThisisEngineering</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span>
         </div>
         <div class="project-body">
           <span class="status status-active">Active</span>
@@ -518,8 +760,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
       </article>
 
       <article class="project" data-tags="aero data">
-        <div class="project-art" aria-hidden="true">
-          <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 24h36c16 0 18 8 30 8h38M8 40h40c14 0 20-6 32-6h32M8 56h36c16 0 18-8 30-8h38"/><path d="M52 40c6-10 18-10 24 0-6 6-18 6-24 0z"/></svg>
+        <div class="project-art">
+          <img src="https://images.unsplash.com/photo-1690984651796-6bbb102fbf30?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1690984651796-6bbb102fbf30?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1690984651796-6bbb102fbf30?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1690984651796-6bbb102fbf30?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:620px) 100vw, (max-width:980px) 50vw, 400px" alt="A race car blurs past at speed on a track" loading="lazy" decoding="async">
+          <span class="project-num" aria-hidden="true">03</span>
+          <span class="credit">Photo: <a href="https://unsplash.com/@ilnevischio?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Thomas De Giorgio</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span>
         </div>
         <div class="project-body">
           <span class="status status-active">Active</span>
@@ -531,8 +775,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
       </article>
 
       <article class="project" data-tags="eng">
-        <div class="project-art" aria-hidden="true">
-          <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="28" y="30" width="64" height="18" rx="4"/><circle cx="36" cy="54" r="8"/><circle cx="84" cy="54" r="8"/><path d="M60 30V16M52 16h16"/></svg>
+        <div class="project-art">
+          <img src="https://images.unsplash.com/photo-1611505908502-5b67e53e3a76?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1611505908502-5b67e53e3a76?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1611505908502-5b67e53e3a76?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1611505908502-5b67e53e3a76?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:620px) 100vw, (max-width:980px) 50vw, 400px" alt="A 3D printer printing a plastic part" loading="lazy" decoding="async">
+          <span class="project-num" aria-hidden="true">04</span>
+          <span class="credit">Photo: <a href="https://unsplash.com/@kadircelep?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Kadir Celep</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span>
         </div>
         <div class="project-body">
           <span class="status status-planned">Planned</span>
@@ -544,8 +790,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
       </article>
 
       <article class="project" data-tags="eng strat">
-        <div class="project-art" aria-hidden="true">
-          <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 46h76v8H22z"/><circle cx="32" cy="58" r="7"/><circle cx="88" cy="58" r="7"/><path d="M50 46l6-14h12l4 14"/><path d="m62 14-6 10h8l-6 10"/></svg>
+        <div class="project-art">
+          <img src="https://images.unsplash.com/photo-1731694411560-050e5b91e943?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1731694411560-050e5b91e943?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1731694411560-050e5b91e943?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1731694411560-050e5b91e943?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:620px) 100vw, (max-width:980px) 50vw, 400px" alt="Hand tools hanging on a workshop wall" loading="lazy" decoding="async">
+          <span class="project-num" aria-hidden="true">05</span>
+          <span class="credit">Photo: <a href="https://unsplash.com/@tonchik?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Anton Savinov</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span>
         </div>
         <div class="project-body">
           <span class="status status-planned">Planned</span>
@@ -557,8 +805,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
       </article>
 
       <article class="project" data-tags="strat data">
-        <div class="project-art" aria-hidden="true">
-          <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="12" width="84" height="56" rx="4"/><path d="M18 28h84M42 12v56"/><path d="M52 42h18M52 54h34"/></svg>
+        <div class="project-art">
+          <img src="https://images.unsplash.com/photo-1748283373393-efe3e2aa8d09?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1748283373393-efe3e2aa8d09?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1748283373393-efe3e2aa8d09?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1748283373393-efe3e2aa8d09?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:620px) 100vw, (max-width:980px) 50vw, 400px" alt="A crew services a race car during a pit stop" loading="lazy" decoding="async">
+          <span class="project-num" aria-hidden="true">06</span>
+          <span class="credit">Photo: <a href="https://unsplash.com/@paulkrueger?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Paul Krüger</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span>
         </div>
         <div class="project-body">
           <span class="status status-active">Active</span>
@@ -573,14 +823,57 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
   </div>
 </section>
 
+<!-- ================= GALLERY ================= -->
+<section class="gallery" id="gallery" aria-labelledby="galleryTitle">
+  <div class="gallery-pin">
+    <div class="wrap gallery-head">
+      <div>
+        <p class="kicker">04 &mdash; Gallery</p>
+        <h2 id="galleryTitle">Where the engineering goes</h2>
+      </div>
+      <p class="lede">Real racing is a stack of STEM problems. These are the moments our projects are built around.</p>
+    </div>
+    <div class="gallery-track" id="galleryTrack">
+        <figure class="frame">
+          <img src="https://images.unsplash.com/photo-1782404182229-9e938ce55f7d?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1782404182229-9e938ce55f7d?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1782404182229-9e938ce55f7d?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1782404182229-9e938ce55f7d?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:759px) 82vw, 40vw" alt="A mechanic tightens a wheel on a red race car in the pit lane" loading="lazy" decoding="async">
+          <figcaption><span class="frame-num">01</span><b>Pit stops</b><span class="frame-text">A wheel change is choreography: the right tools, perfect timing and a lot of practice.</span><span class="credit">Photo: <a href="https://unsplash.com/@bharat05?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">BHARAT VISHAWAKARMA</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span></figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="https://images.unsplash.com/photo-1699138346782-8a8b211c3da2?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1699138346782-8a8b211c3da2?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1699138346782-8a8b211c3da2?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1699138346782-8a8b211c3da2?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:759px) 82vw, 40vw" alt="A driver races a car around a track" loading="lazy" decoding="async">
+          <figcaption><span class="frame-num">02</span><b>Racecraft</b><span class="frame-text">Braking points, racing lines and the data that proves which one is faster.</span><span class="credit">Photo: <a href="https://unsplash.com/@isaacmaffeis?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Isaac Maffeis</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span></figcaption>
+        </figure>
+        <figure class="frame tall">
+          <img src="https://images.unsplash.com/photo-1552255440-ac1fa0a5b2a3?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1552255440-ac1fa0a5b2a3?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1552255440-ac1fa0a5b2a3?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1552255440-ac1fa0a5b2a3?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:759px) 82vw, 28vw" alt="A driver in a helmet sits in a race car cockpit" loading="lazy" decoding="async">
+          <figcaption><span class="frame-num">03</span><b>The cockpit</b><span class="frame-text">Ergonomics, safety and the controls a driver works with at full speed.</span><span class="credit">Photo: <a href="https://unsplash.com/@spencerdavis?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Spencer Davis</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span></figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="https://images.unsplash.com/photo-1683813479751-61c58cd6df5b?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1683813479751-61c58cd6df5b?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1683813479751-61c58cd6df5b?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1683813479751-61c58cd6df5b?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:759px) 82vw, 40vw" alt="Close-up of sim racing equipment" loading="lazy" decoding="async">
+          <figcaption><span class="frame-num">04</span><b>Sim rigs</b><span class="frame-text">Wheel bases, pedals and force feedback: the kind of setup we&rsquo;re building toward.</span><span class="credit">Photo: <a href="https://unsplash.com/@liamcharmer?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Liam Charmer</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span></figcaption>
+        </figure>
+        <figure class="frame tall">
+          <img src="https://images.unsplash.com/photo-1611444535898-b7d8c02c2cf2?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1611444535898-b7d8c02c2cf2?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1611444535898-b7d8c02c2cf2?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1611444535898-b7d8c02c2cf2?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:759px) 82vw, 28vw" alt="Black-and-white portrait of a racer getting ready to race" loading="lazy" decoding="async">
+          <figcaption><span class="frame-num">05</span><b>The driver</b><span class="frame-text">Reaction time, fitness and focus are part of the engineering too.</span><span class="credit">Photo: <a href="https://unsplash.com/@woodkell?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Woody Kelly</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span></figcaption>
+        </figure>
+        <a class="frame frame-cta" href="#join">
+          <span class="frame-num">06</span>
+          <b>Your project<br>goes here</b>
+          <span class="frame-text">Bring an idea or just bring yourself. Sign up and pick a crew.</span>
+          <span class="cta-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+    </div>
+  </div>
+</section>
+
 <!-- ================= SCHEDULE ================= -->
 <section class="section" id="schedule" aria-labelledby="schedTitle">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="schedTitle">Events &amp; schedule</h2>
+      <p class="kicker">05 &mdash; Schedule</p>
+        <h2 id="schedTitle">Events &amp; schedule</h2>
     </div>
     <div class="sched-grid">
       <div class="regular">
+        <div class="regular-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1564343003935-1c0ca13e6ddd?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1564343003935-1c0ca13e6ddd?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1564343003935-1c0ca13e6ddd?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1564343003935-1c0ca13e6ddd?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:920px) 100vw, 480px" alt="" loading="lazy" decoding="async"></div>
         <div class="big">Every WIN Red</div>
         <dl>
           <dt>Where</dt><dd>Room C206</dd>
@@ -588,6 +881,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
           <dt>Updates</dt><dd>Google Classroom &amp; Instagram</dd>
         </dl>
         <p class="note">Can't make one? Check Google Classroom for what you missed.</p>
+        <span class="credit regular-credit">Photo: <a href="https://unsplash.com/@martzzl?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Marcel Strauß</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span>
       </div>
 
       <div>
@@ -636,7 +930,12 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 <section class="section" id="join" aria-labelledby="joinTitle">
   <div class="wrap join-grid">
     <div class="join-side">
+      <figure class="join-photo">
+        <img src="https://images.unsplash.com/photo-1761335284674-0fb01d5bb4cd?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800" srcset="https://images.unsplash.com/photo-1761335284674-0fb01d5bb4cd?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=480 480w, https://images.unsplash.com/photo-1761335284674-0fb01d5bb4cd?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=800 800w, https://images.unsplash.com/photo-1761335284674-0fb01d5bb4cd?ixlib=rb-4.1.0&auto=format&fit=max&q=70&w=1200 1200w" sizes="(max-width:920px) 100vw, 540px" alt="A racing driver adjusting a helmet before a race" loading="lazy" decoding="async">
+        <figcaption><span class="join-big" aria-hidden="true">Your seat<br>is open.</span><span class="credit">Photo: <a href="https://unsplash.com/@pittao?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Pittao</a> / <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span></figcaption>
+      </figure>
       <div class="section-head" style="margin-bottom:0">
+        <p class="kicker">06 &mdash; Join</p>
         <h2 id="joinTitle">Join the club</h2>
         <p class="lede">No experience needed. Sign up here and we'll see you at the next WIN Red.</p>
       </div>
@@ -718,7 +1017,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 <section class="section" id="sponsor" aria-labelledby="sponsorTitle">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="sponsorTitle">Sponsor our team</h2>
+      <p class="kicker">07 &mdash; Sponsors</p>
+        <h2 id="sponsorTitle">Sponsor our team</h2>
       <p class="lede">Local support turns classroom ideas into real builds. Here's what your help makes possible.</p>
     </div>
     <div class="why">
@@ -737,6 +1037,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
 
 <!-- ================= FOOTER / CONTACT ================= -->
 <footer id="contact" aria-labelledby="contactTitle">
+  <p class="mega" aria-hidden="true">WHS Motorsport</p>
   <div class="wrap">
     <div class="foot-grid">
       <div>
@@ -768,6 +1069,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;background:#111316}
         <a href="privacy.html#cookies">Cookies</a>
         <a href="terms.html">Terms of Use</a>
       </nav>
+      <p>Photos come from photographers on <a href="https://unsplash.com/?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a> and are credited on each image. Sponsor section texture: <a href="https://unsplash.com/@lawlesscapture?utm_source=whs_motorsport_stem_club&utm_medium=referral" target="_blank" rel="noopener">Lawless Capture</a>. They show motorsport in general, not our club.</p>
       <p>&copy; <span id="year">2026</span> WHS Motorsport &amp; STEM Club. All rights reserved.</p>
       <p>WHS Motorsport &amp; STEM Club is a student organization at Winchester High School. This website is maintained by club members and is not an official website of Winchester High School or Winchester Public Schools. Team, series and brand names mentioned belong to their respective owners; the club is not affiliated with Formula 1, the FIA or any racing team.</p>
     </div>
@@ -1410,6 +1712,123 @@ const CONFIG = {
 </script>
 
 
+<script>
+/* ================= REDESIGN: nav glass, scroll progress, statement, gallery, spotlight, grain ================= */
+(function () {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const narrow = window.matchMedia('(max-width: 759px)');
+  const root = document.documentElement;
+  const nav = document.querySelector('.nav');
+  const clamp = v => Math.max(0, Math.min(1, v));
+
+  /* film grain for the whole page, generated once */
+  try {
+    const c = document.createElement('canvas'); c.width = c.height = 180;
+    const g = c.getContext('2d'), d = g.createImageData(180, 180);
+    for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+    g.putImageData(d, 0, 0);
+    root.style.setProperty('--grain', 'url(' + c.toDataURL('image/png') + ')');
+  } catch (e) { /* no grain, no problem */ }
+
+  /* statement: wrap each word so it can light up */
+  const st = document.getElementById('manifesto');
+  const stText = document.getElementById('statementText');
+  const HOT = ['physics', 'design', 'build'];
+  let words = [];
+  if (st && stText) {
+    if (reduce) st.classList.add('static');
+    else {
+      const parts = stText.textContent.split(/(\s+)/);
+      stText.textContent = '';
+      parts.forEach(p => {
+        if (/^\s+$/.test(p) || !p) { stText.append(p); return; }
+        const w = document.createElement('span');
+        w.className = 'w' + (HOT.includes(p.toLowerCase().replace(/[^a-z]/g, '')) ? ' hot' : '');
+        w.textContent = p;
+        stText.append(w); words.push(w);
+      });
+    }
+  }
+
+  /* gallery: pinned horizontal scroll on wide screens, swipeable strip on phones */
+  const gal = document.getElementById('gallery');
+  const track = document.getElementById('galleryTrack');
+  const pin = gal && gal.querySelector('.gallery-pin');
+  let gNative = true, maxX = 0;
+  function layoutGallery() {
+    if (!gal || !track) return;
+    gNative = reduce || narrow.matches;
+    gal.classList.toggle('native', gNative);
+    if (gNative) { gal.style.height = ''; track.style.transform = ''; return; }
+    maxX = Math.max(0, Math.ceil(track.getBoundingClientRect().width - window.innerWidth));
+    gal.style.height = (window.innerHeight + maxX) + 'px';
+  }
+  if (track) track.addEventListener('focusin', e => {
+    if (gNative) return;
+    const f = e.target.closest('.frame');
+    if (!f) return;
+    requestAnimationFrame(() => {
+      pin.scrollLeft = 0;
+      const x = Math.min(maxX, Math.max(0, f.offsetLeft - (window.innerWidth - f.offsetWidth) / 2));
+      window.scrollTo({ top: gal.getBoundingClientRect().top + window.scrollY + x, behavior: 'auto' });
+    });
+  });
+
+  /* one scroll handler for everything */
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const y = window.scrollY, vh = window.innerHeight;
+    const max = root.scrollHeight - vh;
+    if (nav) {
+      nav.classList.toggle('solid', y > 30);
+      const bar = document.getElementById('progress');
+      if (bar) bar.style.setProperty('--p', max > 0 ? clamp(y / max).toFixed(4) : 0);
+    }
+    if (words.length) {
+      const r = st.getBoundingClientRect(), total = Math.max(1, st.offsetHeight - vh);
+      if (r.bottom > 0 && r.top < vh) {
+        const p = clamp((vh * 0.35 - r.top) / total);
+        st.style.setProperty('--sp', p.toFixed(4));
+        const lit = Math.round(clamp(p * 1.3) * words.length);
+        words.forEach((w, i) => w.classList.toggle('lit', i < lit));
+      }
+    }
+    if (gal && !gNative) {
+      const r = gal.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < vh) {
+        const p = maxX ? clamp(-r.top / maxX) : 0;
+        track.style.transform = 'translate3d(' + (-p * maxX).toFixed(1) + 'px,0,0)';
+      }
+    }
+  }
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { layoutGallery(); update(); });
+  if (narrow.addEventListener) narrow.addEventListener('change', () => { layoutGallery(); update(); });
+  layoutGallery(); update();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { layoutGallery(); update(); });
+
+  /* cursor spotlight on the pillar cards */
+  document.querySelectorAll('.pillars li').forEach(li => li.addEventListener('pointermove', e => {
+    const r = li.getBoundingClientRect();
+    li.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    li.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+
+  /* cards rise in one after another */
+  if (!reduce && 'IntersectionObserver' in window) {
+    const items = [...document.querySelectorAll('.projects .project, .pillars li, .why > div')];
+    items.forEach(el => { el.classList.add('rise'); el.style.setProperty('--i', [...el.parentElement.children].indexOf(el) % 3); });
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target; el.classList.add('seen'); io.unobserve(el);
+      setTimeout(() => { el.classList.remove('rise', 'seen'); el.style.removeProperty('--i'); }, 1400);   // hand hover effects back
+    }), { threshold: 0.12 });
+    items.forEach(el => io.observe(el));
+  }
+})();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ================= 3D CAR: 2026-spec F1 car, built in code at real scale (meters) =================
